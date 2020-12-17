@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"yao1222.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="I wanna practice markdown, so I find a website.This markdown online website is really helpful.Click Here! 正好想先練習一下mardown用法發現了一個有用的網站（套件）可以線上編輯就是它!">
+  <meta name="description" content="Loops and Iteration練習break &#x2F; continue 在迴圈裡的作用 123456789while True:    raw_input &#x3D; input(&amp;#x27;&gt; &amp;#x27;)    line &#x3D; raw_input    if line[0]&#x3D;&#x3D;&amp;#x27;#&amp;#x27;:        continue    if line &#x3D;&#x3D; &amp;#x27;done&amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Markdown">
-<meta property="og:url" content="http://yao1222.github.io/blog/2020/12/03/Markdown/index.html">
+<meta property="og:title" content="Python Loop">
+<meta property="og:url" content="http://yao1222.github.io/blog/2020/12/17/Python-loop/index.html">
 <meta property="og:site_name" content="YAO">
-<meta property="og:description" content="I wanna practice markdown, so I find a website.This markdown online website is really helpful.Click Here! 正好想先練習一下mardown用法發現了一個有用的網站（套件）可以線上編輯就是它!">
+<meta property="og:description" content="Loops and Iteration練習break &#x2F; continue 在迴圈裡的作用 123456789while True:    raw_input &#x3D; input(&amp;#x27;&gt; &amp;#x27;)    line &#x3D; raw_input    if line[0]&#x3D;&#x3D;&amp;#x27;#&amp;#x27;:        continue    if line &#x3D;&#x3D; &amp;#x27;done&amp;#x">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-12-03T12:34:35.000Z">
-<meta property="article:modified_time" content="2020-12-03T12:38:36.146Z">
+<meta property="article:published_time" content="2020-12-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-17T08:29:13.268Z">
 <meta property="article:author" content="Sihyu Yao">
-<meta property="article:tag" content="Note">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yao1222.github.io/blog/2020/12/03/Markdown/">
+<link rel="canonical" href="http://yao1222.github.io/blog/2020/12/17/Python-loop/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>Markdown | YAO</title>
+  <title>Python Loop | YAO</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/03/Markdown/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/17/Python-loop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Markdown
+          Python Loop
         </h1>
 
         <div class="post-meta">
@@ -191,7 +191,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-03 20:34:35 / Modified: 20:38:36" itemprop="dateCreated datePublished" datetime="2020-12-03T20:34:35+08:00">2020-12-03</time>
+              <time title="Created: 2020-12-17 00:00:00 / Modified: 16:29:13" itemprop="dateCreated datePublished" datetime="2020-12-17T00:00:00+08:00">2020-12-17</time>
             </span>
 
           
@@ -205,8 +205,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>I wanna practice markdown, so I find a website.<br>This markdown online website is really helpful.<br><a target="_blank" rel="noopener" href="https://markdown-editor.github.io/#" title="Click Here!">Click Here!</a></p>
-<p>正好想先練習一下mardown用法<br>發現了一個有用的網站（套件）可以線上編輯<br><a target="_blank" rel="noopener" href="https://markdown-editor.github.io/#">就是它!</a></p>
+        <h1 id="Loops-and-Iteration"><a href="#Loops-and-Iteration" class="headerlink" title="Loops and Iteration"></a>Loops and Iteration</h1><p>練習break / continue 在迴圈裡的作用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    raw_input = <span class="built_in">input</span>(<span class="string">&#x27;&gt; &#x27;</span>)</span><br><span class="line">    line = raw_input</span><br><span class="line">    <span class="keyword">if</span> line[<span class="number">0</span>]==<span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">if</span> line == <span class="string">&#x27;done&#x27;</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(line)</span><br><span class="line">print(<span class="string">&#x27;Done!!&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>Q: What does the word ‘continue’ do in the middle of a loop?<br>…<br>Ans: Skips to the next iteration of the loop.</p>
+<h1 id="Definite-loop"><a href="#Definite-loop" class="headerlink" title="Definite loop"></a>Definite loop</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ary = [<span class="string">&#x27;Hailey&#x27;</span>,<span class="string">&#x27;Julia&#x27;</span>,<span class="string">&#x27;KP&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ary:</span><br><span class="line">    print(<span class="string">&#x27;Happy New Year:&#x27;</span>,i)</span><br><span class="line">print(<span class="string">&#x27;done&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="what’s-the-largest-number"><a href="#what’s-the-largest-number" class="headerlink" title="what’s the largest number?"></a>what’s the largest number?</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ary = [<span class="number">29</span>,<span class="number">10</span>,<span class="number">88</span>,<span class="number">3</span>,<span class="number">91</span>,<span class="number">42</span>,<span class="number">13</span>,<span class="number">6</span>]</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> ary:</span><br><span class="line">    <span class="keyword">if</span> i &gt; num:</span><br><span class="line">        num=i</span><br><span class="line">        print(<span class="string">&#x27;i: &#x27;</span>,i)</span><br><span class="line">        print(<span class="string">&#x27;num: &#x27;</span>,num)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">&#x27;i: &#x27;</span>,i)</span><br><span class="line">        print(<span class="string">&#x27;num: &#x27;</span>,num)</span><br><span class="line">print(<span class="string">&#x27;End. The largest number is &#x27;</span>, num)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Try-it-and-find-which-line-is-wrong-below"><a href="#Try-it-and-find-which-line-is-wrong-below" class="headerlink" title="Try it and find which line is wrong below!"></a>Try it and find which line is wrong below!</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">smallest = <span class="literal">None</span></span><br><span class="line">print(<span class="string">&quot;Before:&quot;</span>, smallest)</span><br><span class="line"><span class="keyword">for</span> itervar <span class="keyword">in</span> [<span class="number">13</span>, <span class="number">41</span>, <span class="number">12</span>, <span class="number">9</span>, <span class="number">74</span>, <span class="number">15</span>]:</span><br><span class="line">    <span class="keyword">if</span> smallest <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> itervar &lt; smallest:</span><br><span class="line">        smallest = itervar</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    print(<span class="string">&quot;Loop:&quot;</span>, itervar, smallest)</span><br><span class="line">print(<span class="string">&quot;Smallest:&quot;</span>, smallest)</span><br></pre></td></tr></table></figure>
+
+<h1 id="is-is-not-Operators"><a href="#is-is-not-Operators" class="headerlink" title="is / is not Operators"></a>is / is not Operators</h1><ul>
+<li>logical expressions</li>
+<li>similar to, but stronger than ‘==’<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># try this </span></span><br><span class="line"><span class="number">0</span> == <span class="number">0.0</span></span><br><span class="line"><span class="number">0</span> <span class="keyword">is</span> <span class="number">0.0</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
     </div>
 
@@ -216,7 +227,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Note/" rel="tag"># Note</a>
+              <a href="/blog/tags/Python/" rel="tag"># Python</a>
           </div>
 
         
@@ -225,13 +236,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/12/02/My-New-Post/" rel="prev" title="My New Post">
-      <i class="fa fa-chevron-left"></i> My New Post
+    <a href="/blog/2020/12/17/What-s-API/" rel="prev" title="What's API">
+      <i class="fa fa-chevron-left"></i> What's API
     </a></div>
-      <div class="post-nav-item">
-    <a href="/blog/2020/12/06/JavaScript30-Challenge/" rel="next" title="JavaScript30 Challenge">
-      JavaScript30 Challenge <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -290,6 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Loops-and-Iteration"><span class="nav-number">1.</span> <span class="nav-text">Loops and Iteration</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Definite-loop"><span class="nav-number">2.</span> <span class="nav-text">Definite loop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what%E2%80%99s-the-largest-number"><span class="nav-number">3.</span> <span class="nav-text">what’s the largest number?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Try-it-and-find-which-line-is-wrong-below"><span class="nav-number">4.</span> <span class="nav-text">Try it and find which line is wrong below!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#is-is-not-Operators"><span class="nav-number">5.</span> <span class="nav-text">is &#x2F; is not Operators</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
