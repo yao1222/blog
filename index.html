@@ -163,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/19/XAMPP-MySQL-MariaDB-%E6%AC%8A%E9%99%90%E8%88%87%E5%AF%86%E7%A2%BC/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/19/2020-12-19-HTTP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -177,7 +177,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/19/XAMPP-MySQL-MariaDB-%E6%AC%8A%E9%99%90%E8%88%87%E5%AF%86%E7%A2%BC/" class="post-title-link" itemprop="url">XAMPP MySQL(MariaDB)權限與密碼</a>
+            <a href="/blog/2020/12/19/2020-12-19-HTTP/" class="post-title-link" itemprop="url">HTTP介紹</a>
         </h2>
 
         <div class="post-meta">
@@ -188,7 +188,159 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-12-19 00:00:00 / Modified: 16:33:37" itemprop="dateCreated datePublished" datetime="2020-12-19T00:00:00+08:00">2020-12-19</time>
+              <time title="Created: 2020-12-19 00:00:00 / Modified: 22:17:52" itemprop="dateCreated datePublished" datetime="2020-12-19T00:00:00+08:00">2020-12-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="HTTP-的起源"><a href="#HTTP-的起源" class="headerlink" title="HTTP 的起源"></a>HTTP 的起源</h1><p>HTTP 最初是Tim BernersLee 1989 年在歐洲核子研究組織（CERN）所發起的。Tim BernersLee 提出了一種能讓遠隔兩地的研究者們共享知識的設想。這個設想的基本理念是：借助多文檔之間相互關聯形成的超文本（HyperText），連成可相互參閱的WWW（World Wide Web）。用於傳輸的超文本傳輸協議（HyperText Transfer Protocol），即HTTP 由此誕生。</p>
+<p>WWW 這一名稱，是Web 瀏覽器當年用來瀏覽超文本的客戶端應用程序時的名稱。現在則用來表示這一系列的集合，也可簡稱為Web。</p>
+<p>HTTP 本身是一個簡單的request-response，它通常運行在TCP 之上。在OSI 七層模型中，HTTP 位於最上層。它並不涉及數據包的傳輸，只是規定了client和server之間的通信格式。定了client可能發送給server什麼樣的消息以及得到什麼樣的響應。請求和響應消息的head以ASCII 碼形式給出。</p>
+<h1 id="Client-Server"><a href="#Client-Server" class="headerlink" title="Client/Server"></a>Client/Server</h1><ul>
+<li>Client端：Browser, python or javascript app, or any app that makes <b>HTTP request</b>.</li>
+<li>Server端：HTTP Web Server, 像是 IIS, Apache Tomcat, NodeJS, Python Tornado.</li>
+</ul>
+<h1 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h1><table>
+<thead>
+<tr>
+<th>Request</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL</td>
+<td><a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a></td>
+</tr>
+<tr>
+<td>method</td>
+<td>GET, POST,…</td>
+</tr>
+<tr>
+<td>Headers</td>
+<td>proxy,cookies,…</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>upload images…</td>
+</tr>
+</tbody></table>
+<h1 id="HTTP-Response"><a href="#HTTP-Response" class="headerlink" title="HTTP Response"></a>HTTP Response</h1><table>
+<thead>
+<tr>
+<th>Response</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Status Code</td>
+<td>success, ok, 404</td>
+</tr>
+<tr>
+<td>Headers</td>
+<td>cache, image/png,…</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>index.html, json file</td>
+</tr>
+</tbody></table>
+<p>可到瀏覽器打開「開發人員的視窗」-&gt;「網路」就能看到我們在開啟一個網頁時，送出的request和得到的response。<br>也可以在主控台輸入javascript看看會抓出什麼東西～</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;https://mofanpy.com/tutorials/python-basic/basic/def-default-parameters/&#x27;</span>).then(<span class="function"><span class="params">a</span>=&gt;</span>a.text()).then(<span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
+<p>javascript酷吧 =P</p>
+<h1 id="how-HTTP-works"><a href="#how-HTTP-works" class="headerlink" title="how HTTP works?"></a>how HTTP works?</h1><p>基本上，就是client端open connection到server，sever傳回要的資送後，clinent端close connection</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server</p>
+</blockquote>
+<p>所以 HTTP1.0就是這樣的概念而成的，這樣的請求呈現重複開開關關的，會～很～慢～。</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server<br>Client == <code>open</code> ==&gt;    GET 我要圖片1  ====&gt; Server<br>&lt;======== <code>close</code> == img1.jpg   ==== Server<br>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == img2.jpg   ==== Server</p>
+</blockquote>
+<p>這樣當然不行呀～網頁東西太多需要快一點，於是進化了 HTTP1.1<br>open之後我就不關，最後才關。</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====-&gt; Server<br>&lt;================ index.html ==== Server<br>Client ==========-&gt;    GET 我要圖片1  ====-&gt; Server<br>&lt;================ img1.jpg   ==== Server<br>Client ==========-&gt;    GET   ====-&gt; Server<br>&lt;======- <code>CLOSE</code> == img2.jpg   ==== Server<br>所以這一版本出現了cache, e-tag等等概念。</p>
+</blockquote>
+<blockquote>
+<p>HTTP1.1</p>
+</blockquote>
+<ul>
+<li>Persisted TCP connection</li>
+<li>Low Latency</li>
+<li>Streaming with Chunked transfer<br>  (這個就是你打開一張圖片結果它慢慢由上到下載出的情況)</li>
+<li>Pipelining (disable by default)</li>
+</ul>
+<blockquote>
+<p>HTTP/2</p>
+</blockquote>
+<ul>
+<li>Compression</li>
+<li>Multiplexing</li>
+<li>Server Push</li>
+<li>SPDY</li>
+<li>secure by default</li>
+<li>Protocol Negotiation during TLS(NPN/ALPN)</li>
+</ul>
+<blockquote>
+<p>HTTP/2 over QUIC (HTTP/3)</p>
+</blockquote>
+<ul>
+<li>Replaces TCP with QUIC (UDP with Congestion Control)</li>
+<li>All HTTP/2 features</li>
+</ul>
+<p>其他資訊可以參考這個<a target="_blank" rel="noopener" href="https://notfalse.net/33/http1_1">HTTP系列介紹</a>，<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 協議入門</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/19/2020-12-19-XAMPP-MySQL-MariaDB-%E6%AC%8A%E9%99%90%E8%88%87%E5%AF%86%E7%A2%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Sihyu Yao">
+      <meta itemprop="description" content="note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/12/19/2020-12-19-XAMPP-MySQL-MariaDB-%E6%AC%8A%E9%99%90%E8%88%87%E5%AF%86%E7%A2%BC/" class="post-title-link" itemprop="url">XAMPP MySQL(MariaDB)權限與密碼</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-12-19 00:00:00 / Modified: 22:19:41" itemprop="dateCreated datePublished" datetime="2020-12-19T00:00:00+08:00">2020-12-19</time>
             </span>
 
           
@@ -249,7 +401,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/17/Python-loop/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/17/2020-12-17-Python-loop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -263,7 +415,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/17/Python-loop/" class="post-title-link" itemprop="url">Python Loop</a>
+            <a href="/blog/2020/12/17/2020-12-17-Python-loop/" class="post-title-link" itemprop="url">Python Loop</a>
         </h2>
 
         <div class="post-meta">
@@ -272,10 +424,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-17 00:00:00 / Modified: 16:29:13" itemprop="dateCreated datePublished" datetime="2020-12-17T00:00:00+08:00">2020-12-17</time>
+              <time title="Created: 2020-12-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-17T00:00:00+08:00">2020-12-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 22:19:32" itemprop="dateModified" datetime="2020-12-19T22:19:32+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -320,7 +478,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/17/What-s-API/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/17/2020-12-17-What-s-API/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -334,7 +492,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/17/What-s-API/" class="post-title-link" itemprop="url">What's API</a>
+            <a href="/blog/2020/12/17/2020-12-17-What-s-API/" class="post-title-link" itemprop="url">What's API</a>
         </h2>
 
         <div class="post-meta">
@@ -343,10 +501,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-17 00:00:00 / Modified: 16:30:22" itemprop="dateCreated datePublished" datetime="2020-12-17T00:00:00+08:00">2020-12-17</time>
+              <time title="Created: 2020-12-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-17T00:00:00+08:00">2020-12-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 22:19:25" itemprop="dateModified" datetime="2020-12-19T22:19:25+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -412,7 +576,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/08/Laravel-CRUD-auth/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/08/2020-12-08-Laravel-CRUD-auth/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -426,7 +590,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/08/Laravel-CRUD-auth/" class="post-title-link" itemprop="url">Laravel CRUD/auth -1</a>
+            <a href="/blog/2020/12/08/2020-12-08-Laravel-CRUD-auth/" class="post-title-link" itemprop="url">Laravel CRUD/auth -1</a>
         </h2>
 
         <div class="post-meta">
@@ -435,10 +599,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-08 23:31:42 / Modified: 23:41:04" itemprop="dateCreated datePublished" datetime="2020-12-08T23:31:42+08:00">2020-12-08</time>
+              <time title="Created: 2020-12-08 23:31:42" itemprop="dateCreated datePublished" datetime="2020-12-08T23:31:42+08:00">2020-12-08</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 22:18:48" itemprop="dateModified" datetime="2020-12-19T22:18:48+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -554,7 +724,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/Laravel-2/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/2020-12-06-Laravel-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -568,7 +738,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/06/Laravel-2/" class="post-title-link" itemprop="url">Laravel-2</a>
+            <a href="/blog/2020/12/06/2020-12-06-Laravel-2/" class="post-title-link" itemprop="url">Laravel-2</a>
         </h2>
 
         <div class="post-meta">
@@ -585,7 +755,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-07 07:56:28" itemprop="dateModified" datetime="2020-12-07T07:56:28+08:00">2020-12-07</time>
+                <time title="Modified: 2020-12-19 22:18:34" itemprop="dateModified" datetime="2020-12-19T22:18:34+08:00">2020-12-19</time>
               </span>
 
           
@@ -640,7 +810,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/Laravel-1/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/2020-12-06-Laravel-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -654,7 +824,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/06/Laravel-1/" class="post-title-link" itemprop="url">Laravel-安裝</a>
+            <a href="/blog/2020/12/06/2020-12-06-Laravel-1/" class="post-title-link" itemprop="url">Laravel-安裝</a>
         </h2>
 
         <div class="post-meta">
@@ -663,10 +833,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-06 19:42:50 / Modified: 20:14:02" itemprop="dateCreated datePublished" datetime="2020-12-06T19:42:50+08:00">2020-12-06</time>
+              <time title="Created: 2020-12-06 19:42:50" itemprop="dateCreated datePublished" datetime="2020-12-06T19:42:50+08:00">2020-12-06</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 22:18:24" itemprop="dateModified" datetime="2020-12-19T22:18:24+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -723,7 +899,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/JavaScript30-Challenge/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/06/2020-12-06-JavaScript30-Challenge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -737,7 +913,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/06/JavaScript30-Challenge/" class="post-title-link" itemprop="url">JavaScript30 Challenge</a>
+            <a href="/blog/2020/12/06/2020-12-06-JavaScript30-Challenge/" class="post-title-link" itemprop="url">JavaScript30 Challenge</a>
         </h2>
 
         <div class="post-meta">
@@ -754,7 +930,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-07 11:18:24" itemprop="dateModified" datetime="2020-12-07T11:18:24+08:00">2020-12-07</time>
+                <time title="Modified: 2020-12-19 22:18:13" itemprop="dateModified" datetime="2020-12-19T22:18:13+08:00">2020-12-19</time>
               </span>
 
           
@@ -790,7 +966,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/03/Markdown/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/03/2020-12-03-Markdown/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -804,7 +980,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/03/Markdown/" class="post-title-link" itemprop="url">Markdown</a>
+            <a href="/blog/2020/12/03/2020-12-03-Markdown/" class="post-title-link" itemprop="url">Markdown</a>
         </h2>
 
         <div class="post-meta">
@@ -813,10 +989,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-03 20:34:35 / Modified: 20:38:36" itemprop="dateCreated datePublished" datetime="2020-12-03T20:34:35+08:00">2020-12-03</time>
+              <time title="Created: 2020-12-03 20:34:35" itemprop="dateCreated datePublished" datetime="2020-12-03T20:34:35+08:00">2020-12-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-19 22:19:00" itemprop="dateModified" datetime="2020-12-19T22:19:00+08:00">2020-12-19</time>
+              </span>
 
           
 
@@ -850,7 +1032,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/02/My-New-Post/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/02/2020-12-02-hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -864,65 +1046,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/02/My-New-Post/" class="post-title-link" itemprop="url">My New Post</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-12-02 20:17:31 / Modified: 20:43:49" itemprop="dateCreated datePublished" datetime="2020-12-02T20:17:31+08:00">2020-12-02</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h1><h2 id="It-works"><a href="#It-works" class="headerlink" title="It works"></a>It works</h2><h3 id="practice-markdown-next"><a href="#practice-markdown-next" class="headerlink" title="practice markdown next"></a>practice markdown next</h3><h4 id="post-formal-article-after-that"><a href="#post-formal-article-after-that" class="headerlink" title="post formal article after that"></a>post formal article after that</h4><h5 id="byeee"><a href="#byeee" class="headerlink" title="byeee"></a>byeee</h5>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/02/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Sihyu Yao">
-      <meta itemprop="description" content="note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/12/02/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/blog/2020/12/02/2020-12-02-hello-world/" class="post-title-link" itemprop="url">Hello World</a>
         </h2>
 
         <div class="post-meta">
@@ -939,7 +1063,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-01 20:48:08" itemprop="dateModified" datetime="2020-12-01T20:48:08+08:00">2020-12-01</time>
+                <time title="Modified: 2020-12-19 22:17:40" itemprop="dateModified" datetime="2020-12-19T22:17:40+08:00">2020-12-19</time>
               </span>
 
           
