@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yao1222.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. NamespacePHP提供namespace來管理class的命名，可以處理的兩種問題：  提供一個組織架構讓在不同任務下的class做分類。 讓不同功能的class的名字可以重複。  比如說有一群用來描述Html table和描述Home的classes：  描述Html 的有: Table, Row, Cell。 描述Home 的有:Table, Chair, Bed。  這時候就可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP namespace">
+<meta property="og:url" content="http://yao1222.github.io/blog/2020/12/21/PHP/index.html">
+<meta property="og:site_name" content="YAO">
+<meta property="og:description" content="1. NamespacePHP提供namespace來管理class的命名，可以處理的兩種問題：  提供一個組織架構讓在不同任務下的class做分類。 讓不同功能的class的名字可以重複。  比如說有一群用來描述Html table和描述Home的classes：  描述Html 的有: Table, Row, Cell。 描述Home 的有:Table, Chair, Bed。  這時候就可以">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-12-22T08:53:57.658Z">
+<meta property="article:author" content="Sihyu Yao">
+<meta property="article:tag" content="-PHP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yao1222.github.io/blog/2020/12/21/PHP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-tw'
+  };
+</script>
+
+  <title>PHP namespace | YAO</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">YAO</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">BLOG</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/21/PHP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Sihyu Yao">
+      <meta itemprop="description" content="note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP namespace
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-21T00:00:00+08:00">2020-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 16:53:57" itemprop="dateModified" datetime="2020-12-22T16:53:57+08:00">2020-12-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-Namespace"><a href="#1-Namespace" class="headerlink" title="1. Namespace"></a>1. Namespace</h1><p>PHP提供<code>namespace</code>來管理<code>class</code>的命名，可以處理的兩種問題：</p>
+<ol>
+<li>提供一個組織架構讓在不同任務下的<code>class</code>做分類。</li>
+<li>讓不同功能的<code>class</code>的名字可以重複。</li>
+</ol>
+<p>比如說有一群用來描述Html table和描述Home的<code>classes</code>：</p>
+<ul>
+<li>描述Html 的有: <code>Table, Row, Cell</code>。</li>
+<li>描述Home 的有:<code>Table, Chair, Bed</code>。</li>
+</ul>
+<p>這時候就可以使用<code>namespace</code>來管理分群，避免兩個<code>Table</code>一樣的名字會衝突，也不用命名成Html_Table和Home_Table。</p>
+<h1 id="2-宣告Namespace"><a href="#2-宣告Namespace" class="headerlink" title="2. 宣告Namespace"></a>2. 宣告Namespace</h1><h2 id="2-1-要用namespace開頭做宣告："><a href="#2-1-要用namespace開頭做宣告：" class="headerlink" title="2.1 要用namespace開頭做宣告："></a>2.1 要用namespace開頭做宣告：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 宣告一個叫做Html的namespace</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的："><a href="#2-2-而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的：" class="headerlink" title="2.2 而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的："></a>2.2 而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 第二行才做宣告，ERROR!</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line">...</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-開始在Html下面定義一個class叫做table："><a href="#2-3-開始在Html下面定義一個class叫做table：" class="headerlink" title="2.3 開始在Html下面定義一個class叫做table："></a>2.3 開始在Html下面定義一個class叫做table：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 宣告 Html</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Html 下定義Table</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$title</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numRows</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Table &#x27;<span class="subst">&#123;$this-&gt;title&#125;</span>&#x27; has <span class="subst">&#123;$this-&gt;numRows&#125;</span> rows.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 新物件table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 使用物件，echo出來看看</span></span><br><span class="line"><span class="variable">$table</span>-&gt;message();</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-nested-namespaces"><a href="#3-nested-namespaces" class="headerlink" title="3. nested namespaces"></a>3. nested namespaces</h1><p>namespaces中也可以包著namespaces:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 Code 中的 Html</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Code</span>\<span class="title">Html</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-使用namespace"><a href="#4-使用namespace" class="headerlink" title="4. 使用namespace"></a>4. 使用namespace</h1><h1 id="4-1-使用-方式："><a href="#4-1-使用-方式：" class="headerlink" title="4.1 使用 / 方式："></a>4.1 使用 / 方式：</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 檔案index.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引入class檔案</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;Html.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Html\Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Html\Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="keyword">new</span> Html\Row();</span><br><span class="line"><span class="variable">$row</span>-&gt;numCells = <span class="number">3</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$table</span>-&gt;message(); <span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$row</span>-&gt;message(); <span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 檔案Html.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$title</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numRows</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Table &#x27;<span class="subst">&#123;$this-&gt;title&#125;</span>&#x27; has <span class="subst">&#123;$this-&gt;numRows&#125;</span> rows.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Row</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numCells</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;The row has <span class="subst">&#123;$this-&gt;numCells&#125;</span> cells.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-2-使用-宣告namespace-方式："><a href="#4-2-使用-宣告namespace-方式：" class="headerlink" title="4.2 使用 宣告namespace 方式："></a>4.2 使用 <code>宣告namespace</code> 方式：</h1><p>把index頁面修改一下：適用需要提取多個class的時候用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 新增這一行</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;Html.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接使用 Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-use-用法"><a href="#5-use-用法" class="headerlink" title="5. use 用法"></a>5. use 用法</h1><p>使用 use 來抓namespace下面的class，並可以用as來縮寫：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 取消namespace這一行</span></span><br><span class="line"><span class="comment">//namespace Html;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;Html.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用use  用as來縮寫</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Html</span>\<span class="title">Row</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Html</span>\<span class="title">Table</span> <span class="title">as</span> <span class="title">T</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接使用 Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> T();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="keyword">new</span> Row();</span><br><span class="line"><span class="variable">$row</span>-&gt;numCells = <span class="number">3</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="6-小結"><a href="#6-小結" class="headerlink" title="6. 小結"></a>6. 小結</h1><p>使用上要注意的小地方：</p>
+<ol>
+<li>你用的 <code>class</code> 是在<code>global space</code>下(就是沒有特別定義namespace的)，還是哪一個<code>namespace</code>下。</li>
+<li>要注意 <code>\</code> 的有無，有些會加在 <code>new \物件</code> 這行，就會影響到抓取的class。</li>
+</ol>
+<p>參考連結：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zTxz_kOLIZM">影片</a>，<a target="_blank" rel="noopener" href="https://www.w3schools.com/php/php_namespaces.asp">w3s</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/PHP/" rel="tag"># -PHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2020/12/19/2020-12-19-XAMPP-MySQL-MariaDB-%E6%AC%8A%E9%99%90%E8%88%87%E5%AF%86%E7%A2%BC/" rel="prev" title="XAMPP MySQL(MariaDB)權限與密碼">
+      <i class="fa fa-chevron-left"></i> XAMPP MySQL(MariaDB)權限與密碼
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Namespace"><span class="nav-number">1.</span> <span class="nav-text">1. Namespace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%AE%A3%E5%91%8ANamespace"><span class="nav-number">2.</span> <span class="nav-text">2. 宣告Namespace</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E8%A6%81%E7%94%A8namespace%E9%96%8B%E9%A0%AD%E5%81%9A%E5%AE%A3%E5%91%8A%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 要用namespace開頭做宣告：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E8%80%8C%E5%AE%A3%E5%91%8A%E5%BF%85%E9%A0%88%E5%9C%A8%E6%AA%94%E6%A1%88%E7%9A%84%E9%96%8B%E9%A0%AD%EF%BC%8C%E5%B0%B1%E9%96%8B%E5%A7%8B%E5%81%9A%E9%80%99%E4%BB%B6%E4%BA%8B%EF%BC%8C%E4%BB%A5%E4%B8%8B%E7%AF%84%E4%BE%8B%E5%B0%B1%E6%98%AF%E9%8C%AF%E8%AA%A4%E7%9A%84%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E9%96%8B%E5%A7%8B%E5%9C%A8Html%E4%B8%8B%E9%9D%A2%E5%AE%9A%E7%BE%A9%E4%B8%80%E5%80%8Bclass%E5%8F%AB%E5%81%9Atable%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 開始在Html下面定義一個class叫做table：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-nested-namespaces"><span class="nav-number">3.</span> <span class="nav-text">3. nested namespaces</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E4%BD%BF%E7%94%A8namespace"><span class="nav-number">4.</span> <span class="nav-text">4. 使用namespace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-1-%E4%BD%BF%E7%94%A8-%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">5.</span> <span class="nav-text">4.1 使用 &#x2F; 方式：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-2-%E4%BD%BF%E7%94%A8-%E5%AE%A3%E5%91%8Anamespace-%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">4.2 使用 宣告namespace 方式：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-use-%E7%94%A8%E6%B3%95"><span class="nav-number">7.</span> <span class="nav-text">5. use 用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%B0%8F%E7%B5%90"><span class="nav-number">8.</span> <span class="nav-text">6. 小結</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Sihyu Yao</p>
+  <div class="site-description" itemprop="description">note</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yao1222" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yao1222" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ysyao9294@gmail.com" title="E-Mail → mailto:ysyao9294@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sihyu Yao</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

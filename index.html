@@ -163,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/19/2020-12-19-HTTP/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/21/PHP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -177,7 +177,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/19/2020-12-19-HTTP/" class="post-title-link" itemprop="url">HTTP介紹</a>
+            <a href="/blog/2020/12/21/PHP/" class="post-title-link" itemprop="url">PHP namespace</a>
         </h2>
 
         <div class="post-meta">
@@ -186,10 +186,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-12-19 00:00:00 / Modified: 22:17:52" itemprop="dateCreated datePublished" datetime="2020-12-19T00:00:00+08:00">2020-12-19</time>
+              <time title="Created: 2020-12-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-21T00:00:00+08:00">2020-12-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-22 16:53:57" itemprop="dateModified" datetime="2020-12-22T16:53:57+08:00">2020-12-22</time>
+              </span>
 
           
 
@@ -202,100 +208,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="HTTP-的起源"><a href="#HTTP-的起源" class="headerlink" title="HTTP 的起源"></a>HTTP 的起源</h1><p>HTTP 最初是Tim BernersLee 1989 年在歐洲核子研究組織（CERN）所發起的。Tim BernersLee 提出了一種能讓遠隔兩地的研究者們共享知識的設想。這個設想的基本理念是：借助多文檔之間相互關聯形成的超文本（HyperText），連成可相互參閱的WWW（World Wide Web）。用於傳輸的超文本傳輸協議（HyperText Transfer Protocol），即HTTP 由此誕生。</p>
-<p>WWW 這一名稱，是Web 瀏覽器當年用來瀏覽超文本的客戶端應用程序時的名稱。現在則用來表示這一系列的集合，也可簡稱為Web。</p>
-<p>HTTP 本身是一個簡單的request-response，它通常運行在TCP 之上。在OSI 七層模型中，HTTP 位於最上層。它並不涉及數據包的傳輸，只是規定了client和server之間的通信格式。定了client可能發送給server什麼樣的消息以及得到什麼樣的響應。請求和響應消息的head以ASCII 碼形式給出。</p>
-<h1 id="Client-Server"><a href="#Client-Server" class="headerlink" title="Client/Server"></a>Client/Server</h1><ul>
-<li>Client端：Browser, python or javascript app, or any app that makes <b>HTTP request</b>.</li>
-<li>Server端：HTTP Web Server, 像是 IIS, Apache Tomcat, NodeJS, Python Tornado.</li>
-</ul>
-<h1 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h1><table>
-<thead>
-<tr>
-<th>Request</th>
-<th>example</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>URL</td>
-<td><a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a></td>
-</tr>
-<tr>
-<td>method</td>
-<td>GET, POST,…</td>
-</tr>
-<tr>
-<td>Headers</td>
-<td>proxy,cookies,…</td>
-</tr>
-<tr>
-<td>Body</td>
-<td>upload images…</td>
-</tr>
-</tbody></table>
-<h1 id="HTTP-Response"><a href="#HTTP-Response" class="headerlink" title="HTTP Response"></a>HTTP Response</h1><table>
-<thead>
-<tr>
-<th>Response</th>
-<th>example</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Status Code</td>
-<td>success, ok, 404</td>
-</tr>
-<tr>
-<td>Headers</td>
-<td>cache, image/png,…</td>
-</tr>
-<tr>
-<td>Body</td>
-<td>index.html, json file</td>
-</tr>
-</tbody></table>
-<p>可到瀏覽器打開「開發人員的視窗」-&gt;「網路」就能看到我們在開啟一個網頁時，送出的request和得到的response。<br>也可以在主控台輸入javascript看看會抓出什麼東西～</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;https://mofanpy.com/tutorials/python-basic/basic/def-default-parameters/&#x27;</span>).then(<span class="function"><span class="params">a</span>=&gt;</span>a.text()).then(<span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
-<p>javascript酷吧 =P</p>
-<h1 id="how-HTTP-works"><a href="#how-HTTP-works" class="headerlink" title="how HTTP works?"></a>how HTTP works?</h1><p>基本上，就是client端open connection到server，sever傳回要的資送後，clinent端close connection</p>
-<blockquote>
-<p>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server</p>
-</blockquote>
-<p>所以 HTTP1.0就是這樣的概念而成的，這樣的請求呈現重複開開關關的，會～很～慢～。</p>
-<blockquote>
-<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server<br>Client == <code>open</code> ==&gt;    GET 我要圖片1  ====&gt; Server<br>&lt;======== <code>close</code> == img1.jpg   ==== Server<br>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == img2.jpg   ==== Server</p>
-</blockquote>
-<p>這樣當然不行呀～網頁東西太多需要快一點，於是進化了 HTTP1.1<br>open之後我就不關，最後才關。</p>
-<blockquote>
-<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====-&gt; Server<br>&lt;================ index.html ==== Server<br>Client ==========-&gt;    GET 我要圖片1  ====-&gt; Server<br>&lt;================ img1.jpg   ==== Server<br>Client ==========-&gt;    GET   ====-&gt; Server<br>&lt;======- <code>CLOSE</code> == img2.jpg   ==== Server<br>所以這一版本出現了cache, e-tag等等概念。</p>
-</blockquote>
-<blockquote>
-<p>HTTP1.1</p>
-</blockquote>
+          <h1 id="1-Namespace"><a href="#1-Namespace" class="headerlink" title="1. Namespace"></a>1. Namespace</h1><p>PHP提供<code>namespace</code>來管理<code>class</code>的命名，可以處理的兩種問題：</p>
+<ol>
+<li>提供一個組織架構讓在不同任務下的<code>class</code>做分類。</li>
+<li>讓不同功能的<code>class</code>的名字可以重複。</li>
+</ol>
+<p>比如說有一群用來描述Html table和描述Home的<code>classes</code>：</p>
 <ul>
-<li>Persisted TCP connection</li>
-<li>Low Latency</li>
-<li>Streaming with Chunked transfer<br>  (這個就是你打開一張圖片結果它慢慢由上到下載出的情況)</li>
-<li>Pipelining (disable by default)</li>
+<li>描述Html 的有: <code>Table, Row, Cell</code>。</li>
+<li>描述Home 的有:<code>Table, Chair, Bed</code>。</li>
 </ul>
-<blockquote>
-<p>HTTP/2</p>
-</blockquote>
-<ul>
-<li>Compression</li>
-<li>Multiplexing</li>
-<li>Server Push</li>
-<li>SPDY</li>
-<li>secure by default</li>
-<li>Protocol Negotiation during TLS(NPN/ALPN)</li>
-</ul>
-<blockquote>
-<p>HTTP/2 over QUIC (HTTP/3)</p>
-</blockquote>
-<ul>
-<li>Replaces TCP with QUIC (UDP with Congestion Control)</li>
-<li>All HTTP/2 features</li>
-</ul>
-<p>其他資訊可以參考這個<a target="_blank" rel="noopener" href="https://notfalse.net/33/http1_1">HTTP系列介紹</a>，<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 協議入門</a></p>
+<p>這時候就可以使用<code>namespace</code>來管理分群，避免兩個<code>Table</code>一樣的名字會衝突，也不用命名成Html_Table和Home_Table。</p>
+<h1 id="2-宣告Namespace"><a href="#2-宣告Namespace" class="headerlink" title="2. 宣告Namespace"></a>2. 宣告Namespace</h1><h2 id="2-1-要用namespace開頭做宣告："><a href="#2-1-要用namespace開頭做宣告：" class="headerlink" title="2.1 要用namespace開頭做宣告："></a>2.1 要用namespace開頭做宣告：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 宣告一個叫做Html的namespace</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>; </span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的："><a href="#2-2-而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的：" class="headerlink" title="2.2 而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的："></a>2.2 而宣告必須在檔案的開頭，就開始做這件事，以下範例就是錯誤的：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 第二行才做宣告，ERROR!</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line">...</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-開始在Html下面定義一個class叫做table："><a href="#2-3-開始在Html下面定義一個class叫做table：" class="headerlink" title="2.3 開始在Html下面定義一個class叫做table："></a>2.3 開始在Html下面定義一個class叫做table：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 宣告 Html</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在Html 下定義Table</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$title</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numRows</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Table &#x27;<span class="subst">&#123;$this-&gt;title&#125;</span>&#x27; has <span class="subst">&#123;$this-&gt;numRows&#125;</span> rows.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 新物件table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 使用物件，echo出來看看</span></span><br><span class="line"><span class="variable">$table</span>-&gt;message();</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-nested-namespaces"><a href="#3-nested-namespaces" class="headerlink" title="3. nested namespaces"></a>3. nested namespaces</h1><p>namespaces中也可以包著namespaces:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 Code 中的 Html</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Code</span>\<span class="title">Html</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-使用namespace"><a href="#4-使用namespace" class="headerlink" title="4. 使用namespace"></a>4. 使用namespace</h1><h1 id="4-1-使用-方式："><a href="#4-1-使用-方式：" class="headerlink" title="4.1 使用 / 方式："></a>4.1 使用 / 方式：</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 檔案index.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 引入class檔案</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;Html.php&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Html\Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Html\Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="keyword">new</span> Html\Row();</span><br><span class="line"><span class="variable">$row</span>-&gt;numCells = <span class="number">3</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$table</span>-&gt;message(); <span class="meta">?&gt;</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="variable">$row</span>-&gt;message(); <span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 檔案Html.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$title</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numRows</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;Table &#x27;<span class="subst">&#123;$this-&gt;title&#125;</span>&#x27; has <span class="subst">&#123;$this-&gt;numRows&#125;</span> rows.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Row</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="variable">$numCells</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">message</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;p&gt;The row has <span class="subst">&#123;$this-&gt;numCells&#125;</span> cells.&lt;/p&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="4-2-使用-宣告namespace-方式："><a href="#4-2-使用-宣告namespace-方式：" class="headerlink" title="4.2 使用 宣告namespace 方式："></a>4.2 使用 <code>宣告namespace</code> 方式：</h1><p>把index頁面修改一下：適用需要提取多個class的時候用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 新增這一行</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Html</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;Html.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接使用 Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> Table();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-use-用法"><a href="#5-use-用法" class="headerlink" title="5. use 用法"></a>5. use 用法</h1><p>使用 use 來抓namespace下面的class，並可以用as來縮寫：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 取消namespace這一行</span></span><br><span class="line"><span class="comment">//namespace Html;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;Html.php&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用use  用as來縮寫</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Html</span>\<span class="title">Row</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Html</span>\<span class="title">Table</span> <span class="title">as</span> <span class="title">T</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接使用 Table</span></span><br><span class="line"><span class="variable">$table</span> = <span class="keyword">new</span> T();</span><br><span class="line"><span class="variable">$table</span>-&gt;title = <span class="string">&quot;My table&quot;</span>;</span><br><span class="line"><span class="variable">$table</span>-&gt;numRows = <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$row</span> = <span class="keyword">new</span> Row();</span><br><span class="line"><span class="variable">$row</span>-&gt;numCells = <span class="number">3</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="6-小結"><a href="#6-小結" class="headerlink" title="6. 小結"></a>6. 小結</h1><p>使用上要注意的小地方：</p>
+<ol>
+<li>你用的 <code>class</code> 是在<code>global space</code>下(就是沒有特別定義namespace的)，還是哪一個<code>namespace</code>下。</li>
+<li>要注意 <code>\</code> 的有無，有些會加在 <code>new \物件</code> 這行，就會影響到抓取的class。</li>
+</ol>
+<p>參考連結：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zTxz_kOLIZM">影片</a>，<a target="_blank" rel="noopener" href="https://www.w3schools.com/php/php_namespaces.asp">w3s</a></p>
 
       
     </div>
