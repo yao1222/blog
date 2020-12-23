@@ -163,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/21/PHP/">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/21/2020-12-21-PHP-namespace/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -177,7 +177,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/12/21/PHP/" class="post-title-link" itemprop="url">PHP namespace</a>
+            <a href="/blog/2020/12/21/2020-12-21-PHP-namespace/" class="post-title-link" itemprop="url">PHP namespace</a>
         </h2>
 
         <div class="post-meta">
@@ -194,7 +194,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-22 16:55:28" itemprop="dateModified" datetime="2020-12-22T16:55:28+08:00">2020-12-22</time>
+                <time title="Modified: 2020-12-22 16:56:06" itemprop="dateModified" datetime="2020-12-22T16:56:06+08:00">2020-12-22</time>
               </span>
 
           
@@ -243,6 +243,301 @@
 <li>要注意 <code>\</code> 的有無，有些會加在 <code>new \物件</code> 這行，就會影響到抓取的class。</li>
 </ol>
 <p>參考連結：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zTxz_kOLIZM">影片</a>，<a target="_blank" rel="noopener" href="https://www.w3schools.com/php/php_namespaces.asp">w3s</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/21/Basic-Ecomm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Sihyu Yao">
+      <meta itemprop="description" content="note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/12/21/Basic-Ecomm/" class="post-title-link" itemprop="url">Basic Ecomm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-21T00:00:00+08:00">2020-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-23 19:44:52" itemprop="dateModified" datetime="2020-12-23T19:44:52+08:00">2020-12-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-Agenda"><a href="#1-Agenda" class="headerlink" title="1. Agenda"></a>1. Agenda</h1><ul>
+<li>Login and Registration</li>
+<li>Home Design</li>
+<li>Product Search</li>
+<li>Add to Cart</li>
+<li>User Order placement</li>
+<li>Order Details</li>
+<li>Order History</li>
+<li>User Profile</li>
+<li>Style with Bootstrap</li>
+<li>git</li>
+</ul>
+<h1 id="2-Login-Page"><a href="#2-Login-Page" class="headerlink" title="2. Login Page"></a>2. Login Page</h1><p>首先架構：</p>
+<ul>
+<li>views<ul>
+<li>base.blade.php</li>
+<li>header.blade.php</li>
+<li>footer.blade.php</li>
+<li>login.blade.php</li>
+</ul>
+</li>
+</ul>
+<p>把各頁面用bootstrap寫完就可以看一下login page長怎樣了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// base.blade.php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 header.blade.php</span></span><br><span class="line">&#123;&#123; View::make(<span class="string">&#x27;header&#x27;</span>) &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 標註section(&#x27;content&#x27;)的範圍</span></span><br><span class="line">@<span class="keyword">yield</span>(<span class="string">&#x27;content&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 footer.blade.php</span></span><br><span class="line">&#123;&#123; View::make(<span class="string">&#x27;footer&#x27;</span>) &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// login.blade.php</span></span><br><span class="line"></span><br><span class="line">@<span class="keyword">extends</span>(<span class="string">&quot;base&quot;</span>)</span><br><span class="line">@section(<span class="string">&quot;content&quot;</span>)</span><br><span class="line">&lt;div class=&quot;container mt-5&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;col-sm-4 offset-md-4 mt-5&quot;&gt;</span><br><span class="line">            &lt;form&gt;....&lt;/form&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">@endsection</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="3-User-Database"><a href="#3-User-Database" class="headerlink" title="3. User Database"></a>3. User Database</h1><p>創建資料庫和資料表:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:migration create_users_table</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 設定table</span></span><br><span class="line"><span class="variable">$table</span>-&gt;id();</span><br><span class="line">            <span class="variable">$table</span>-&gt;string(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line">            <span class="variable">$table</span>-&gt;string(<span class="string">&#x27;email&#x27;</span>)-&gt;unique();</span><br><span class="line">            <span class="variable">$table</span>-&gt;string(<span class="string">&#x27;password&#x27;</span>);</span><br><span class="line">            <span class="variable">$table</span>-&gt;timestamps();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同步到資料庫</span></span><br><span class="line">$ php artisan migrate</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用seeder填充測試資料</span></span><br><span class="line">$ php artisan make:seeder UsersSeeder</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># UsersSeeder.php</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">DB</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Facades</span>\<span class="title">Hash</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Support</span>\<span class="title">Str</span>;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        DB::table(<span class="string">&#x27;users&#x27;</span>)-&gt;insert([</span><br><span class="line">            <span class="string">&#x27;name&#x27;</span> =&gt; Str::random(<span class="number">10</span>),</span><br><span class="line">            <span class="string">&#x27;email&#x27;</span> =&gt; Str::random(<span class="number">10</span>) . <span class="string">&#x27;@gmail.com&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; Hash::make(<span class="string">&#x27;password&#x27;</span>),</span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 執行後會產生測試資料在資料庫</span></span><br><span class="line">$ php artisan db:seed --class UsersSeeder</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-User-Controller"><a href="#4-User-Controller" class="headerlink" title="4. User Controller"></a>4. User Controller</h1><h3 id="4-1-建立controller"><a href="#4-1-建立controller" class="headerlink" title="4.1 建立controller"></a>4.1 建立controller</h3><p>建立好會員資料後，目前在登入頁面輸入的話還無法判斷是否登入成功，接著就要創建controller來進行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:controller UserController</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt;&lt; UserController.php &gt;&gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 Laravel 中要取得 HTTP 的請求資訊，可以透過 Illuminate\Http\Request class 來處理。</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 在 Controller 中，透過 Dependency injection 代入 Request class 以供使用。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params">Request <span class="variable">$req</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 可以透過 input() 取得</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$req</span>-&gt;input();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># &lt;&lt;&lt;&lt; web.php &gt;&gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line">Route::post(<span class="string">&#x27;/login&#x27;</span>, [UserController::class, <span class="string">&#x27;login&#x27;</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>做到這邊我們就可以在login page輸入欄位，之後會跳到form輸出後的頁面，且會看到return 出來的所有input。</p>
+<h3 id="4-2-model-middleware-記住登入資訊"><a href="#4-2-model-middleware-記住登入資訊" class="headerlink" title="4.2 model/middleware 記住登入資訊"></a>4.2 model/middleware 記住登入資訊</h3><p>再來就要看database所對應到的 <code>model</code>，才能取回和儲存取回和儲存會員資料。<br>在建立起<code>middleware</code>，若是希望每個 HTTP 請求都經過一個中介層，只要將中介層的類別加入到 <code>app/Http/Kernel.php</code> 的 <code>$middleware</code> 屬性清單列表中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:middleware UserAuth</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">    <span class="comment">// 新增這兩行在Kernel.php</span></span><br><span class="line">        \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">        \App\Http\Middleware\UserAuth:<span class="class"><span class="keyword">class</span>,</span></span><br><span class="line"><span class="class">    ];</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Tips: The <code>path()</code> method returns the request’s path information. So, if the incoming request is targeted at <code>http://example.com/foo/bar</code>, the path method will return <code>foo/bar</code>:</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt;&lt;UserAuth.php&gt;&gt;&gt;&gt; (middleware)</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">Request <span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$request</span>-&gt;path() == <span class="string">&#x27;login&#x27;</span> &amp;&amp; <span class="variable">$request</span>-&gt;session()-&gt;has(<span class="string">&#x27;user&#x27;</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="5-Product-Page"><a href="#5-Product-Page" class="headerlink" title="5. Product Page"></a>5. Product Page</h1><p>照慣例建立table</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ php artisan make:migration create_products_table</span><br></pre></td></tr></table></figure>
+<p>一樣用seeder做測試資料。</p>
+<h3 id="5-1-product-controller"><a href="#5-1-product-controller" class="headerlink" title="5.1 product controller"></a>5.1 product controller</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="variable">$data</span> = Product::all();</span><br><span class="line">       <span class="keyword">return</span> view(<span class="string">&#x27;product&#x27;</span>, [<span class="string">&#x27;products&#x27;</span> =&gt; <span class="variable">$data</span>]);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-product-view-page"><a href="#5-2-product-view-page" class="headerlink" title="5.2 product view page"></a>5.2 product view page</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt; product.blade.php &gt;&gt;&gt;</span></span><br><span class="line">.... Bootstrap carousel Start</span><br><span class="line"></span><br><span class="line">    &lt;div class=&quot;carousel-inner&quot; style=&quot;text-align: -webkit-center;&quot;&gt;</span><br><span class="line">    @<span class="keyword">foreach</span>(<span class="variable">$products</span> <span class="keyword">as</span> <span class="variable">$item</span>)</span><br><span class="line">            &lt;div class=&quot;carousel-item &#123;&#123; $item[&#x27;id&#x27;]==1 ? &#x27;active&#x27;:&#x27;&#x27; &#125;&#125;&quot;&gt;</span><br><span class="line">                &lt;a href=<span class="string">&quot;detail/&#123;<span class="subst">&#123;$item[&#x27;id&#x27;]&#125;</span>&#125;&quot;</span>&gt;</span><br><span class="line">                &lt;img class=&quot;d-block&quot; style=&quot;height: 300px;&quot; src=&quot;&#123;&#123;$item[&#x27;gallery&#x27;]&#125;&#125;&quot; alt=&quot;First slide&quot;&gt;</span><br><span class="line">                &lt;/a&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">    @<span class="keyword">endforeach</span></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--Trending Wrapper--&gt;</span><br><span class="line">.... Bootstrap carousel End</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="6-Search-Page"><a href="#6-Search-Page" class="headerlink" title="6. Search Page"></a>6. Search Page</h1><p>多個method就行了!</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt; productController.php &gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params">Request <span class="variable">$req</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//$data = Product::find($id);</span></span><br><span class="line">        <span class="comment">//return view(&#x27;detail&#x27;, [&#x27;detail&#x27; =&gt; $data]);</span></span><br><span class="line">        <span class="variable">$data</span> = Product::where(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;like&#x27;</span>, <span class="string">&#x27;%&#x27;</span> . <span class="variable">$req</span>-&gt;input(<span class="string">&#x27;query&#x27;</span>) . <span class="string">&#x27;%&#x27;</span>)-&gt;get();</span><br><span class="line">        <span class="keyword">return</span> view(<span class="string">&#x27;search&#x27;</span>, [<span class="string">&#x27;results&#x27;</span> =&gt; <span class="variable">$data</span>]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="7-Cart"><a href="#7-Cart" class="headerlink" title="7. Cart"></a>7. Cart</h1><h3 id="7-1-Cart-Database"><a href="#7-1-Cart-Database" class="headerlink" title="7.1 Cart Database"></a>7.1 Cart Database</h3><p>創建<code>create_cart_table</code>，<code>Cart (Model)</code>，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt; ProductController.php &gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addToCart</span>(<span class="params">Request <span class="variable">$req</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$req</span>-&gt;session()-&gt;has(<span class="string">&#x27;user&#x27;</span>)) &#123;</span><br><span class="line">            <span class="variable">$cart</span> = <span class="keyword">new</span> cart;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// get ID from session</span></span><br><span class="line">            <span class="variable">$cart</span>-&gt;user_id = <span class="variable">$req</span>-&gt;session()-&gt;get(<span class="string">&#x27;user&#x27;</span>)[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// get product_id from form input</span></span><br><span class="line">            <span class="variable">$cart</span>-&gt;product_id = <span class="variable">$req</span>-&gt;product_id;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// save to DB</span></span><br><span class="line">            <span class="variable">$cart</span>-&gt;save();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> redirect(<span class="string">&#x27;/login&#x27;</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Tips: <code>save()</code> The model’s <code>created_at</code> and <code>updated_at</code> timestamps will automatically be set when the save method is called, so there is no need to set them manually.</p>
+</blockquote>
+<h3 id="7-2-cart-function"><a href="#7-2-cart-function" class="headerlink" title="7.2 cart function"></a>7.2 cart function</h3><p>利用計算cart裡面出現幾次user id來作為購物車數量。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt; ProductController.php &gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">cartItem</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$userId</span> = Session::get(<span class="string">&#x27;user&#x27;</span>)[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line">        <span class="keyword">return</span> cart::where(<span class="string">&#x27;user_id&#x27;</span>, <span class="variable">$userId</span>)-&gt;count();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-3-show-cart-page"><a href="#7-3-show-cart-page" class="headerlink" title="7.3 show cart page"></a>7.3 show cart page</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;&lt;&lt; ProductController.php &gt;&gt;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 join 抓取 user&#x27;s product</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">cartList</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$userId</span> = Session::get(<span class="string">&#x27;user&#x27;</span>)[<span class="string">&#x27;id&#x27;</span>];</span><br><span class="line">        <span class="variable">$products</span> = DB::table(<span class="string">&#x27;cart&#x27;</span>)</span><br><span class="line">            -&gt;join(<span class="string">&#x27;products&#x27;</span>, <span class="string">&#x27;cart.product_id&#x27;</span>, <span class="string">&#x27;=&#x27;</span>, <span class="string">&#x27;products.id&#x27;</span>)</span><br><span class="line">            -&gt;where(<span class="string">&#x27;cart.user_id&#x27;</span>, <span class="variable">$userId</span>)</span><br><span class="line">            -&gt;select(<span class="string">&#x27;products.*&#x27;</span>, <span class="string">&#x27;cart.id as cart_id&#x27;</span>)</span><br><span class="line">            -&gt;get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> view(<span class="string">&#x27;carlist&#x27;</span>, [<span class="string">&#x27;products&#x27;</span> =&gt; <span class="variable">$products</span>]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
+    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/19/2020-12-19-HTTP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Sihyu Yao">
+      <meta itemprop="description" content="note">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YAO">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/12/19/2020-12-19-HTTP/" class="post-title-link" itemprop="url">HTTP介紹</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-12-19 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-19T00:00:00+08:00">2020-12-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-23 19:43:18" itemprop="dateModified" datetime="2020-12-23T19:43:18+08:00">2020-12-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-HTTP-的起源"><a href="#1-HTTP-的起源" class="headerlink" title="1. HTTP 的起源"></a>1. HTTP 的起源</h1><p>HTTP 最初是Tim BernersLee 1989 年在歐洲核子研究組織（CERN）所發起的。Tim BernersLee 提出了一種能讓遠隔兩地的研究者們共享知識的設想。這個設想的基本理念是：借助多文檔之間相互關聯形成的超文本（HyperText），連成可相互參閱的WWW（World Wide Web）。用於傳輸的超文本傳輸協議（HyperText Transfer Protocol），即HTTP 由此誕生。</p>
+<p>WWW 這一名稱，是Web 瀏覽器當年用來瀏覽超文本的客戶端應用程序時的名稱。現在則用來表示這一系列的集合，也可簡稱為Web。</p>
+<p>HTTP 本身是一個簡單的request-response，它通常運行在TCP 之上。在OSI 七層模型中，HTTP 位於最上層。它並不涉及數據包的傳輸，只是規定了client和server之間的通信格式。定了client可能發送給server什麼樣的消息以及得到什麼樣的響應。請求和響應消息的head以ASCII 碼形式給出。</p>
+<h1 id="2-Client-Server"><a href="#2-Client-Server" class="headerlink" title="2. Client/Server"></a>2. Client/Server</h1><ul>
+<li>Client端：Browser, python or javascript app, or any app that makes <b>HTTP request</b>.</li>
+<li>Server端：HTTP Web Server, 像是 IIS, Apache Tomcat, NodeJS, Python Tornado.</li>
+</ul>
+<h1 id="3-HTTP-Request"><a href="#3-HTTP-Request" class="headerlink" title="3. HTTP Request"></a>3. HTTP Request</h1><table>
+<thead>
+<tr>
+<th>Request</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL</td>
+<td><a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a></td>
+</tr>
+<tr>
+<td>method</td>
+<td>GET, POST,…</td>
+</tr>
+<tr>
+<td>Headers</td>
+<td>proxy,cookies,…</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>upload images…</td>
+</tr>
+</tbody></table>
+<h1 id="4-HTTP-Response"><a href="#4-HTTP-Response" class="headerlink" title="4. HTTP Response"></a>4. HTTP Response</h1><table>
+<thead>
+<tr>
+<th>Response</th>
+<th>example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Status Code</td>
+<td>success, ok, 404</td>
+</tr>
+<tr>
+<td>Headers</td>
+<td>cache, image/png,…</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>index.html, json file</td>
+</tr>
+</tbody></table>
+<p>可到瀏覽器打開「開發人員的視窗」-&gt;「網路」就能看到我們在開啟一個網頁時，送出的request和得到的response。<br>也可以在主控台輸入javascript看看會抓出什麼東西～</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">&#x27;https://mofanpy.com/tutorials/python-basic/basic/def-default-parameters/&#x27;</span>).then(<span class="function"><span class="params">a</span>=&gt;</span>a.text()).then(<span class="built_in">console</span>.log)</span><br></pre></td></tr></table></figure>
+<p>javascript酷吧 =P</p>
+<h1 id="5-how-HTTP-works"><a href="#5-how-HTTP-works" class="headerlink" title="5. how HTTP works?"></a>5. how HTTP works?</h1><p>基本上，就是client端open connection到server，sever傳回要的資送後，clinent端close connection</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server</p>
+</blockquote>
+<p>所以 HTTP1.0就是這樣的概念而成的，這樣的請求呈現重複開開關關的，會～很～慢～。</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====&gt; Server<br>&lt;======== <code>close</code> == index.html ==== Server<br>Client == <code>open</code> ==&gt;    GET 我要圖片1  ====&gt; Server<br>&lt;======== <code>close</code> == img1.jpg   ==== Server<br>Client == <code>open</code> ==&gt;    GET   ====&gt; Server<br>&lt;======== <code>close</code> == img2.jpg   ==== Server</p>
+</blockquote>
+<p>這樣當然不行呀～網頁東西太多需要快一點，於是進化了 HTTP1.1<br>open之後我就不關，最後才關。</p>
+<blockquote>
+<p>Client == <code>open</code> ==&gt;    GET 我要首頁   ====-&gt; Server<br>&lt;================ index.html ==== Server<br>Client ==========-&gt;    GET 我要圖片1  ====-&gt; Server<br>&lt;================ img1.jpg   ==== Server<br>Client ==========-&gt;    GET   ====-&gt; Server<br>&lt;======- <code>CLOSE</code> == img2.jpg   ==== Server<br>所以這一版本出現了cache, e-tag等等概念。</p>
+</blockquote>
+<blockquote>
+<p>HTTP1.1</p>
+</blockquote>
+<ul>
+<li>Persisted TCP connection</li>
+<li>Low Latency</li>
+<li>Streaming with Chunked transfer<br>  (這個就是你打開一張圖片結果它慢慢由上到下載出的情況)</li>
+<li>Pipelining (disable by default)</li>
+</ul>
+<blockquote>
+<p>HTTP/2</p>
+</blockquote>
+<ul>
+<li>Compression</li>
+<li>Multiplexing</li>
+<li>Server Push</li>
+<li>SPDY</li>
+<li>secure by default</li>
+<li>Protocol Negotiation during TLS(NPN/ALPN)</li>
+</ul>
+<blockquote>
+<p>HTTP/2 over QUIC (HTTP/3)</p>
+</blockquote>
+<ul>
+<li>Replaces TCP with QUIC (UDP with Congestion Control)</li>
+<li>All HTTP/2 features</li>
+</ul>
+<p>其他資訊可以參考這個<a target="_blank" rel="noopener" href="https://notfalse.net/33/http1_1">HTTP系列介紹</a>，<a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/08/http.html">HTTP 協議入門</a></p>
 
       
     </div>
@@ -456,7 +751,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 22:19:25" itemprop="dateModified" datetime="2020-12-19T22:19:25+08:00">2020-12-19</time>
+                <time title="Modified: 2020-12-23 19:43:43" itemprop="dateModified" datetime="2020-12-23T19:43:43+08:00">2020-12-23</time>
               </span>
 
           
@@ -909,149 +1204,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/03/2020-12-03-Markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Sihyu Yao">
-      <meta itemprop="description" content="note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/12/03/2020-12-03-Markdown/" class="post-title-link" itemprop="url">Markdown</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-03 20:34:35" itemprop="dateCreated datePublished" datetime="2020-12-03T20:34:35+08:00">2020-12-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 22:19:00" itemprop="dateModified" datetime="2020-12-19T22:19:00+08:00">2020-12-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>I wanna practice markdown, so I find a website.<br>This markdown online website is really helpful.<br><a target="_blank" rel="noopener" href="https://markdown-editor.github.io/#" title="Click Here!">Click Here!</a></p>
-<p>正好想先練習一下mardown用法<br>發現了一個有用的網站（套件）可以線上編輯<br><a target="_blank" rel="noopener" href="https://markdown-editor.github.io/#">就是它!</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-tw">
-    <link itemprop="mainEntityOfPage" href="http://yao1222.github.io/blog/2020/12/02/2020-12-02-hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Sihyu Yao">
-      <meta itemprop="description" content="note">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YAO">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/12/02/2020-12-02-hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-02 00:00:00" itemprop="dateCreated datePublished" datetime="2020-12-02T00:00:00+08:00">2020-12-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-19 22:17:40" itemprop="dateModified" datetime="2020-12-19T22:17:40+08:00">2020-12-19</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
 
@@ -1125,7 +1277,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/blog/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
